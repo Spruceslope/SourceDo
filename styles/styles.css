@@ -1,0 +1,21 @@
+.todo {
+    border: 1px solid white;
+}
+
+.todo .comment-block {
+    border: 1px solid gray;
+    background-color: #FF6A00;
+    padding: 5px 10px 5px 10px;
+    color: #EBECED;
+    font-family: monospace;
+}
+
+.todo .code-block {
+    border: 1px solid gray;
+    margin: 5px 0 0 0;
+    background-color: #D9D9D9;
+}
+
+.todo .code-block pre {
+    padding: 10px 20px 10px 20px;
+}
