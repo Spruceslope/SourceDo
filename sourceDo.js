@@ -3,8 +3,9 @@ var stream = require('stream');
 var Q = require('q');
 var findFiles = require('./js/findFiles');
 var buildView = require('./js/buildView');
+var config = require('./js/config/index');
 
-var path = 'C:/Users/ef35oi/INGProjects/ponboardingwa/pOnboardingWAApp/app/js',
+var path = config.path,
     todoStarted = false,
     commentStarted = false,
     todoList = [],
@@ -22,6 +23,7 @@ var run = function () {
     findFiles.inDir(path, '.js')
         .then(function (files) {
             readFileLineByLine(files, function () {
+                
                 buildView.build(todoList);
             });
         });
@@ -81,6 +83,11 @@ var readFileLineByLine = function (files, fn) {
 };
 
 var parseTodos = function (line, fileName) {
+    
+    /* TODO : 
+    Refactor to be done functional style */
+    /* END */
+    
     var commentStartExp = new RegExp(/^\/\* TODO/i),
         commentEndExp = new RegExp(/^\*\//),
         todoEndExp = new RegExp(/^\/\* END \*\//i),
@@ -90,8 +97,8 @@ var parseTodos = function (line, fileName) {
         commentStarted = true;
         todo = new Todo();
         todo.fileName = fileName;
+        todoStarted = true;
     }
-
     if (commentStarted && !commentStartExp.test(ln) && !commentEndExp.test(ln)) {
         todo.commentBlock.push(ln);
     }
@@ -105,7 +112,7 @@ var parseTodos = function (line, fileName) {
         todo.codeBlock.push(line);
         console.log(line)
     }
-
+    
     if (todoStarted && todoEndExp.test(ln)) {
         todoStarted = false;
         todoList.push(todo);

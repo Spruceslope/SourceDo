@@ -26,6 +26,9 @@ module.exports = (function () {
     
     var getAllFiles = function (dirPath, ext, fn) {
         dir.paths(dirPath, function (err, paths) {
+            /* TODO : 
+            Add error handling */
+            /* END */
             fn(paths, ext);
         });
     };

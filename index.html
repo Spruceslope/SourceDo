@@ -1,10 +1,0 @@
-<!doctype>
-
-<html>
-    <head>
-        <link rel="stylesheet" href="./styles/styles.css">
-    </head>
-    <body>
-        <div class="todo"><div class="comment-block">* Core module for onboarding and rio processes.<br>* All dependencies are loaded into the application<br></div><div class="code-block"><pre>angular.module('pOnboardingWAApp', [    'ngResource',    'ngCookies',    'ngSanitize',    'ingGlobal',    'mcpBridge',    'mcpContext',    'ui.bootstrap.typeahead',    'ui.bootstrap.position',    'ui.bootstrap.bindHtml',    'template/typeahead/typeahead-match.html',    'template/typeahead/typeahead-popup.html',    'ui.bootstrap.transition',    'ui.bootstrap.modal',    'template/modal/backdrop.html',    'template/modal/window.html']);</pre></div></div><div class="todo"><div class="comment-block">* Testing todos<br></div><div class="code-block"><pre>    var logBusinessProcessEventStop = function (data) {        if (!startedEventModels.logBusinessProcessEvent.data) {            console.error('LoggingService:', 'cannot invoke logBusinessProcessEventStop without started business event.');            return;        }        var dataModel = angular.copy(startedEventModels.logBusinessProcessEvent),            timestamps = getCurrentTimestamps();        dataModel.data.parentEventId = dataModel.data.eventId;        dataModel.data.eventId = generateEventId();        dataModel.data.eventType = 'BusinessProcessEvent';        dataModel.data.businessProcessEventName = 'Stop Onboarding';        dataModel.data.status = data.status;        dataModel.data.technicalCode = getFailedTechnicalCodes();        dataModel.data.technicalReason = getFailedTechnicalReasons();        dataModel.data.endTimestamp = timestamps.formattedTimestamp;        dataModel.logic.unixEndTimestamp = timestamps.unix;        dataModel.data.duration = dataModel.logic.unixEndTimestamp - dataModel.logic.unixStartTimestamp;        postLogEvent(dataModel.data);        return dataModel;    };</pre></div></div>
-    </body>
-</html>
